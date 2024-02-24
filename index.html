@@ -4,23 +4,49 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Overlay Content</title>
+    <title>Control Website</title>
   </head>
   <body>
-    <div id="contentContainer"></div>
+    <div id="iframeContainer"></div>
+    <button onclick="nextVideo()">Next</button>
 
     <script>
-      window.addEventListener("message", function (event) {
-        if (event.data.action === "changeContent") {
-          // Perform the necessary actions to update the content based on event.data.currentNumber
-          var contentContainer = document.getElementById("contentContainer");
-          contentContainer.innerText =
-            "Overlay content is now " + event.data.currentNumber;
+      var dynamicNumbers = [
+        8261950, 9114367, 9114383, 9114393, 9114398,
+        9114402 /* Add 9 more dynamic numbers here */,
+      ];
+      var currentIndex = 0;
 
-          // Acknowledge the content change back to the control website
-          window.parent.postMessage({ action: "contentChanged" }, "*");
-        }
-      });
+      function nextVideo() {
+        currentIndex = (currentIndex + 1) % dynamicNumbers.length;
+        updateIframe();
+      }
+
+      function updateIframe() {
+        var iframeContainer = document.getElementById("iframeContainer");
+        var iframe = document.createElement("iframe");
+        iframe.src =
+          "https://cricheroes.in/live-video-scorecard/" +
+          dynamicNumbers[currentIndex];
+
+        iframe.style.border = "0px #ffffff none";
+        iframe.name = "myiFrame";
+        iframe.scrolling = "no";
+        iframe.frameBorder = "0";
+        iframe.marginHeight = "0px";
+        iframe.marginWidth = "0px";
+        iframe.height = "1080px";
+        iframe.width = "1920px";
+        iframe.allowFullscreen = true;
+
+        // Append the new iframe
+        iframeContainer.innerHTML = "";
+        iframeContainer.appendChild(iframe);
+      }
+
+      // Initial update
+      updateIframe();
     </script>
   </body>
 </html>
+
