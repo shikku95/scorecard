@@ -37,7 +37,7 @@
         // Use postMessage to communicate the change to the overlay inside the iframe
         iframe.contentWindow.postMessage(
           { action: "changeContent", currentNumber },
-          "https://your-overlay-site-domain.com"
+          "https://cricheroes.in"
         );
       }
 
@@ -48,7 +48,7 @@
 
       window.addEventListener("message", function (event) {
         // Handle messages received from the overlay inside the iframe
-        if (event.origin === "https://your-overlay-site-domain.com" && event.data.action === "contentChanged") {
+        if (event.origin === "https://cricheroes.in" && event.data.action === "contentChanged") {
           // Handle the content change acknowledgment
           console.log("Overlay content has been changed");
         }
