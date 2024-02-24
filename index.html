@@ -7,46 +7,19 @@
     <title>Control Website</title>
   </head>
   <body>
-    <div id="iframeContainer"></div>
-    <button onclick="nextVideo()">Next</button>
-
-    <script>
-      var dynamicNumbers = [
-        8261950, 9114367, 9114383, 9114393, 9114398,
-        9114402 /* Add 9 more dynamic numbers here */,
-      ];
-      var currentIndex = 0;
-
-      function nextVideo() {
-        currentIndex = (currentIndex + 1) % dynamicNumbers.length;
-        updateIframe();
-      }
-
-      function updateIframe() {
-        var iframeContainer = document.getElementById("iframeContainer");
-        var iframe = document.createElement("iframe");
-        iframe.src =
-          "https://cricheroes.in/live-video-scorecard/" +
-          dynamicNumbers[currentIndex];
-
-        iframe.style.border = "0px #ffffff none";
-        iframe.name = "myiFrame";
-        iframe.scrolling = "no";
-        iframe.frameBorder = "0";
-        iframe.marginHeight = "0px";
-        iframe.marginWidth = "0px";
-        iframe.height = "1080px";
-        iframe.width = "1920px";
-        iframe.allowFullscreen = true;
-
-        // Append the new iframe
-        iframeContainer.innerHTML = "";
-        iframeContainer.appendChild(iframe);
-      }
-
-      // Initial update
-      updateIframe();
-    </script>
+    <iframe
+      src="https://cricheroes.in/live-video-scorecard/9114367"
+      style="border: 0px #ffffff none"
+      name="myiFrame"
+      scrolling="no"
+      frameborder="0"
+      marginheight="0px"
+      marginwidth="0px"
+      height="1080px"
+      width="1920px"
+      allowfullscreen
+    ></iframe>
+    <a href="./match2.html">Next</a>
   </body>
 </html>
 
