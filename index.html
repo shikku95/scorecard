@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Iframe</title>
+  </head>
+  <body>
+    <iframe
+      id="dynamicIframe"
+      style="border: 0px #ffffff none"
+      name="myiFrame"
+      scrolling="no"
+      frameborder="0"
+      marginheight="0px"
+      marginwidth="0px"
+      height="1080px"
+      width="1920px"
+      allowfullscreen
+    ></iframe>
+
+    <button onclick="nextVideo()">Next</button>
+
+    <script>
+      // Initial dynamic numbers
+      var dynamicNumbers = [
+        8261950, 9114367, 9114383, 9114393, 9114398,
+        9114402 /* Add 9 more dynamic numbers here */,
+      ];
+      var currentIndex = 0;
+
+      // Function to update iframe src
+      function updateIframe() {
+        var iframe = document.getElementById("dynamicIframe");
+        var currentNumber = dynamicNumbers[currentIndex];
+        iframe.src =
+          "https://cricheroes.in/live-video-scorecard/" + currentNumber;
+      }
+
+      // Function to handle "Next" button click
+      function nextVideo() {
+        currentIndex = (currentIndex + 1) % dynamicNumbers.length;
+        updateIframe();
+      }
+
+      // Initial update
+      updateIframe();
+    </script>
+  </body>
+</html>
