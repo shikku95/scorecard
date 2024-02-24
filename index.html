@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dynamic Iframe</title>
+    <title>Dynamic Overlay</title>
   </head>
   <body>
     <iframe
@@ -23,28 +23,40 @@
     <button onclick="nextVideo()">Next</button>
 
     <script>
-      // Initial dynamic numbers
       var dynamicNumbers = [
-        9161089, 9114367, 9114383, 9114393, 9114398,
+        8261950, 9114367, 9114383, 9114393, 9114398,
         9114402 /* Add 9 more dynamic numbers here */,
       ];
       var currentIndex = 0;
 
-      // Function to update iframe src
       function updateIframe() {
         var iframe = document.getElementById("dynamicIframe");
         var currentNumber = dynamicNumbers[currentIndex];
-        iframe.src =
-          "https://cricheroes.in/custom-blue-ticker/" + currentNumber;
+        iframe.src = "https://cricheroes.in/live-video-scorecard/" + currentNumber;
+
+        // Use postMessage to communicate the change to the overlay inside the iframe
+        iframe.contentWindow.postMessage(
+          { action: "changeContent", currentNumber },
+          "https://your-overlay-site-domain.com"
+        );
       }
-      // Function to handle "Next" button click
+
       function nextVideo() {
         currentIndex = (currentIndex + 1) % dynamicNumbers.length;
         updateIframe();
       }
+
+      window.addEventListener("message", function (event) {
+        // Handle messages received from the overlay inside the iframe
+        if (event.origin === "https://your-overlay-site-domain.com" && event.data.action === "contentChanged") {
+          // Handle the content change acknowledgment
+          console.log("Overlay content has been changed");
+        }
+      });
 
       // Initial update
       updateIframe();
     </script>
   </body>
 </html>
+
